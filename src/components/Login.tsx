@@ -1,7 +1,7 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 import { Form, Button } from "react-bootstrap";
 
-const Login = () => {
+const Login: FunctionComponent = () => {
   return (
     <section className="sec-login">
       <div className="login-form p-5">
@@ -12,8 +12,13 @@ const Login = () => {
           <Form.Group className="mb-4" controlId="formBasicPassword">
             <Form.Control type="password" placeholder="Password" />
           </Form.Group>
-          <Button variant="success" type="submit" className="w-100">
-            Submit
+          <Button
+            variant="success"
+            type="submit"
+            className="w-100"
+            style={{ fontWeight: "bold" }}
+          >
+            Sign in
           </Button>
         </Form>
       </div>
