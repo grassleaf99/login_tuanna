@@ -6,6 +6,7 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
 import Login from "./Login";
 
 function App() {
