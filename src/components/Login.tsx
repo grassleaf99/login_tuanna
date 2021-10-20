@@ -21,6 +21,8 @@ const Login: FunctionComponent = () => {
               placeholder="Username"
               value={authenData.username}
               onChange={(e) => dispatch(changeUsernameField(e.target.value))}
+              maxLength={256}
+              required
             />
           </Form.Group>
           <Form.Group className="mb-4" controlId="formBasicPassword">
@@ -29,12 +31,15 @@ const Login: FunctionComponent = () => {
               placeholder="Password"
               value={authenData.password}
               onChange={(e) => dispatch(changePasswordField(e.target.value))}
+              maxLength={256}
+              required
             />
           </Form.Group>
           <Button
             variant="success"
             type="submit"
             className="w-100"
+            size="lg"
             style={{ fontWeight: "bold" }}
           >
             Sign in
