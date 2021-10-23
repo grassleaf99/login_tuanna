@@ -1,4 +1,5 @@
 import React, { FunctionComponent, ReactElement } from "react";
+import { Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Form, Button } from "react-bootstrap";
 import {
@@ -11,7 +12,11 @@ const Login: FunctionComponent = (): ReactElement => {
   const authenData = useSelector((state: State) => state.auth);
   const dispatch = useDispatch();
 
-  return (
+  const isLoggedIn = Boolean(localStorage.getItem("access_token"));
+
+  return isLoggedIn ? (
+    <Redirect to="/admin" />
+  ) : (
     <section className="sec-login">
       <div className="login-form p-5">
         <Form>
