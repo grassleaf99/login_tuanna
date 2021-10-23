@@ -1,10 +1,11 @@
 import React, { FunctionComponent, ReactElement } from "react";
 import { Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Spinner } from "react-bootstrap";
 import {
   changeUsernameField,
   changePasswordField,
+  changeLoading,
 } from "../store/action_creators";
 import State from "../store/state";
 
@@ -19,7 +20,12 @@ const Login: FunctionComponent = (): ReactElement => {
   ) : (
     <section className="sec-login">
       <div className="login-form p-5">
-        <Form>
+        <Form
+          onSubmit={(e) => {
+            e.preventDefault();
+            dispatch(changeLoading());
+          }}
+        >
           <Form.Group className="mb-4" controlId="formBasicEmail">
             <Form.Control
               type="text"
@@ -47,6 +53,14 @@ const Login: FunctionComponent = (): ReactElement => {
             size="lg"
             style={{ fontWeight: "bold" }}
           >
+            {authenData.loading && (
+              <Spinner
+                as="span"
+                animation="border"
+                size="sm"
+                className="me-2"
+              />
+            )}
             Sign in
           </Button>
         </Form>

@@ -14,4 +14,10 @@ const changePasswordField = (password: string) => {
   };
 };
 
+export const changeLoading = () => {
+  return {
+    type: "LOGIN_REQUEST" as ActionTypes,
+  };
+};
+
 export { changeUsernameField, changePasswordField };
