@@ -14,10 +14,8 @@ import Login from "./Login";
 
 const store = createStore(
   loginReducer,
-  typeof window === "object" &&
-    typeof window.__REDUX_DEVTOOLS_EXTENSION__ !== "undefined"
-    ? window.__REDUX_DEVTOOLS_EXTENSION__()
-    : (f) => f
+  (window as any).__REDUX_DEVTOOLS_EXTENSION__ &&
+    (window as any).__REDUX_DEVTOOLS_EXTENSION__()
 );
 
 function App() {
