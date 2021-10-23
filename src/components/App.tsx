@@ -11,6 +11,9 @@ import { Provider } from "react-redux";
 import loginReducer from "../store/reducers";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Login from "./Login";
+import NotFound from "./NotFound";
+import PrivateRoute from "./PrivateRoute";
+import Admin from "./Admin";
 
 const store = createStore(
   loginReducer,
@@ -20,16 +23,18 @@ const store = createStore(
 
 function App() {
   return (
-    <Router>
-      <Switch>
-        <Provider store={store}>
+    <Provider store={store}>
+      <Router>
+        <Switch>
           <Route path="/" exact>
             <Redirect to="/login"></Redirect>
           </Route>
           <Route path="/login" exact component={Login} />
-        </Provider>
-      </Switch>
-    </Router>
+          <PrivateRoute path="/admin" exact component={Admin} />
+          <Route path="*" component={NotFound} />
+        </Switch>
+      </Router>
+    </Provider>
   );
 }
 

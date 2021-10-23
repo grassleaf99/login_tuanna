@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, ReactElement } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Form, Button } from "react-bootstrap";
 import {
@@ -7,7 +7,7 @@ import {
 } from "../store/action_creators";
 import State from "../store/state";
 
-const Login: FunctionComponent = () => {
+const Login: FunctionComponent = (): ReactElement => {
   const authenData = useSelector((state: State) => state);
   const dispatch = useDispatch();
 
