@@ -1,25 +1,35 @@
+import "bootstrap/dist/css/bootstrap.min.css";
 import React from "react";
-import "../css/App.css";
+import { Provider } from "react-redux";
 import {
   BrowserRouter as Router,
-  Switch,
-  Route,
   Redirect,
+  Route,
+  Switch,
 } from "react-router-dom";
-import { createStore } from "redux";
-import { Provider } from "react-redux";
+import { createStore, applyMiddleware, compose } from "redux";
+import createSagaMiddleware from "redux-saga";
+import "../css/App.css";
 import loginReducer from "../store/reducers";
-import "bootstrap/dist/css/bootstrap.min.css";
+import authSaga from "../store/saga/authSaga";
+import Admin from "./Admin";
 import Login from "./Login";
 import NotFound from "./NotFound";
 import PrivateRoute from "./PrivateRoute";
-import Admin from "./Admin";
 
+// Create the saga middleware
+const sagaMiddleware = createSagaMiddleware();
+// Mount it on the Store
 const store = createStore(
   loginReducer,
-  (window as any).__REDUX_DEVTOOLS_EXTENSION__ &&
-    (window as any).__REDUX_DEVTOOLS_EXTENSION__()
+  compose(
+    applyMiddleware(sagaMiddleware),
+    (window as any).__REDUX_DEVTOOLS_EXTENSION__ &&
+      (window as any).__REDUX_DEVTOOLS_EXTENSION__()
+  )
 );
+// Then run the saga
+sagaMiddleware.run(authSaga);
 
 function App() {
   return (
