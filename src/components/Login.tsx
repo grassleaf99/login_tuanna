@@ -8,7 +8,7 @@ import {
 import State from "../store/state";
 
 const Login: FunctionComponent = (): ReactElement => {
-  const authenData = useSelector((state: State) => state);
+  const authenData = useSelector((state: State) => state.auth);
   const dispatch = useDispatch();
 
   return (
