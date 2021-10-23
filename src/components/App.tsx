@@ -11,7 +11,7 @@ import { createStore, applyMiddleware, compose, combineReducers } from "redux";
 import createSagaMiddleware from "redux-saga";
 import "../css/App.css";
 import { loginReducer } from "../store/reducers";
-import authSaga from "../store/saga/authSaga";
+import rootSaga from "../store/saga";
 import Admin from "./Admin";
 import Login from "./Login";
 import NotFound from "./NotFound";
@@ -31,7 +31,7 @@ const store = createStore(
   )
 );
 // Then run the saga
-sagaMiddleware.run(authSaga);
+sagaMiddleware.run(rootSaga);
 
 function App() {
   return (
