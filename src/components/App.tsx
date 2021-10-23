@@ -7,21 +7,23 @@ import {
   Route,
   Switch,
 } from "react-router-dom";
-import { createStore, applyMiddleware, compose } from "redux";
+import { createStore, applyMiddleware, compose, combineReducers } from "redux";
 import createSagaMiddleware from "redux-saga";
 import "../css/App.css";
-import loginReducer from "../store/reducers";
+import { loginReducer } from "../store/reducers";
 import authSaga from "../store/saga/authSaga";
 import Admin from "./Admin";
 import Login from "./Login";
 import NotFound from "./NotFound";
 import PrivateRoute from "./PrivateRoute";
 
+const rootReducer = combineReducers({ auth: loginReducer });
+
 // Create the saga middleware
 const sagaMiddleware = createSagaMiddleware();
 // Mount it on the Store
 const store = createStore(
-  loginReducer,
+  rootReducer,
   compose(
     applyMiddleware(sagaMiddleware),
     (window as any).__REDUX_DEVTOOLS_EXTENSION__ &&

@@ -1,5 +1,4 @@
-interface State {
+export interface AuthState {
   username: string;
   password: string;
 }
-export default State;

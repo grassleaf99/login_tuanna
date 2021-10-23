@@ -1,9 +1,9 @@
-import State from "./state";
+import { AuthState } from "./state";
 
-export default function loginReducer(
-  state: State = { username: "", password: "" },
+export function loginReducer(
+  state: AuthState = { username: "", password: "" },
   action: any
-): State {
+): AuthState {
   switch (action.type) {
     case "CHANGE_USERNAME_FIELD":
       return { ...state, username: action.payload };
