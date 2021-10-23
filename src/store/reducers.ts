@@ -12,6 +12,8 @@ export function loginReducer(
       return { ...state, password: action.payload };
     case "LOGIN_REQUEST" as ActionTypes:
       return { ...state, loading: true };
+    case "NOT_SEND_REQUEST_LOGIN" as ActionTypes:
+      return { ...state, loading: false };
     default:
       return state;
   }

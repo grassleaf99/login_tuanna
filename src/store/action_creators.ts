@@ -14,9 +14,16 @@ const changePasswordField = (password: string) => {
   };
 };
 
-export const changeLoading = () => {
+export const setLoading = (payload: { username: string; password: string }) => {
   return {
     type: "LOGIN_REQUEST" as ActionTypes,
+    payload,
+  };
+};
+
+export const clearLoading = () => {
+  return {
+    type: "NOT_SEND_REQUEST_LOGIN" as ActionTypes,
   };
 };
 

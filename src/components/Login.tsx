@@ -5,7 +5,7 @@ import { Form, Button, Spinner } from "react-bootstrap";
 import {
   changeUsernameField,
   changePasswordField,
-  changeLoading,
+  setLoading,
 } from "../store/action_creators";
 import State from "../store/state";
 
@@ -23,7 +23,12 @@ const Login: FunctionComponent = (): ReactElement => {
         <Form
           onSubmit={(e) => {
             e.preventDefault();
-            dispatch(changeLoading());
+            dispatch(
+              setLoading({
+                username: authenData.username,
+                password: authenData.password,
+              })
+            );
           }}
         >
           <Form.Group className="mb-4" controlId="formBasicEmail">
