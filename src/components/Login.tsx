@@ -54,9 +54,8 @@ const Login: FunctionComponent = (): ReactElement => {
           <Button
             variant="success"
             type="submit"
-            className="w-100"
+            className="w-100 fw-bold"
             size="lg"
-            style={{ fontWeight: "bold" }}
           >
             {authenData.loading && (
               <Spinner
