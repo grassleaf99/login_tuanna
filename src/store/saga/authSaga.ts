@@ -1,4 +1,4 @@
-import { takeEvery, takeLatest, call } from "redux-saga/effects";
+import { takeEvery, takeLatest, call, put } from "redux-saga/effects";
 import ActionTypes from "../types";
 import axios, { AxiosResponse } from "axios";
 
@@ -53,7 +53,12 @@ function* loginRequestSaga(action: {
       password: action.payload.password,
     });
     console.log(res.data.data);
-  } catch (error) {}
+    localStorage.setItem("access_token", res.data.data);
+  } catch (error) {
+    console.log(error);
+    alert("Wrong username or password. Please try again!!");
+  }
+  yield put({ type: "NOT_SEND_REQUEST_LOGIN" as ActionTypes });
 }
 
 export default authSaga;
