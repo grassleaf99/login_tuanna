@@ -1,6 +1,7 @@
 import { takeEvery, takeLatest, call, put } from "redux-saga/effects";
 import ActionTypes from "../types";
 import axios, { AxiosResponse } from "axios";
+import { clearLoading } from "../action_creators";
 
 interface HttpbinResponse {
   args: {};
@@ -58,7 +59,7 @@ function* loginRequestSaga(action: {
     console.log(error);
     alert("Wrong username or password. Please try again!!");
   }
-  yield put({ type: "NOT_SEND_REQUEST_LOGIN" as ActionTypes });
+  yield put(clearLoading());
 }
 
 export default authSaga;
