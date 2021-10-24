@@ -2,6 +2,7 @@ import { takeEvery, takeLatest, call, put } from "redux-saga/effects";
 import ActionTypes from "../types";
 import axios, { AxiosResponse } from "axios";
 import { clearLoading } from "../action_creators";
+import { push } from "connected-react-router";
 
 interface HttpbinResponse {
   args: {};
@@ -25,6 +26,7 @@ function* authSaga() {
   yield takeEvery("CHANGE_USERNAME_FIELD" as ActionTypes, showLogUsername);
   yield takeEvery("CHANGE_PASSWORD_FIELD" as ActionTypes, showLogPassword);
   yield takeLatest("LOGIN_REQUEST" as ActionTypes, loginRequestSaga);
+  yield takeLatest("LOG_OUT" as ActionTypes, logoutSaga);
 }
 
 function showLogUsername() {
@@ -55,11 +57,18 @@ function* loginRequestSaga(action: {
     });
     console.log(res.data.data);
     localStorage.setItem("access_token", res.data.data);
+    // redirect to admin page
+    yield put(push("/admin"));
   } catch (error) {
     console.log(error);
     alert("Wrong username or password. Please try again!!");
   }
   yield put(clearLoading());
+}
+
+function* logoutSaga() {
+  // redirect to log in page
+  yield put(push("/login"));
 }
 
 export default authSaga;

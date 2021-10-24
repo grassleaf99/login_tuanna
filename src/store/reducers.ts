@@ -14,6 +14,8 @@ export function loginReducer(
       return { ...state, loading: true };
     case "NOT_SEND_REQUEST_LOGIN" as ActionTypes:
       return { ...state, loading: false };
+    case "LOG_OUT" as ActionTypes:
+      return { ...state, username: "", password: "" };
     default:
       return state;
   }

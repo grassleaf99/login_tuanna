@@ -27,4 +27,10 @@ export const clearLoading = () => {
   };
 };
 
+export const logOut = () => {
+  return {
+    type: "LOG_OUT" as ActionTypes,
+  };
+};
+
 export { changeUsernameField, changePasswordField };
