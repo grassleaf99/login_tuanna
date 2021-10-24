@@ -1,12 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import React from "react";
 import { Provider } from "react-redux";
-import {
-  BrowserRouter as Router,
-  Redirect,
-  Route,
-  Switch,
-} from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 import { createStore, applyMiddleware, compose, combineReducers } from "redux";
 import createSagaMiddleware from "redux-saga";
 import "../css/App.css";
@@ -16,8 +11,14 @@ import Admin from "./Admin";
 import Login from "./Login";
 import NotFound from "./NotFound";
 import PrivateRoute from "./PrivateRoute";
+import { connectRouter, routerMiddleware } from "connected-react-router";
+import { history } from "../utils";
+import { ConnectedRouter } from "connected-react-router";
 
-const rootReducer = combineReducers({ auth: loginReducer });
+const rootReducer = combineReducers({
+  router: connectRouter(history),
+  auth: loginReducer,
+});
 
 // Create the saga middleware
 const sagaMiddleware = createSagaMiddleware();
@@ -25,7 +26,10 @@ const sagaMiddleware = createSagaMiddleware();
 const store = createStore(
   rootReducer,
   compose(
-    applyMiddleware(sagaMiddleware),
+    applyMiddleware(
+      sagaMiddleware,
+      routerMiddleware(history) // for dispatching history actions
+    ),
     (window as any).__REDUX_DEVTOOLS_EXTENSION__ &&
       (window as any).__REDUX_DEVTOOLS_EXTENSION__()
   )
@@ -36,7 +40,8 @@ sagaMiddleware.run(rootSaga);
 function App() {
   return (
     <Provider store={store}>
-      <Router>
+      {/* place ConnectedRouter under Provider */}
+      <ConnectedRouter history={history}>
         <Switch>
           <Route path="/" exact>
             <Redirect to="/login"></Redirect>
@@ -45,7 +50,7 @@ function App() {
           <PrivateRoute path="/admin" exact component={Admin} />
           <Route path="*" component={NotFound} />
         </Switch>
-      </Router>
+      </ConnectedRouter>
     </Provider>
   );
 }
