@@ -29,9 +29,10 @@ const store = createStore(
     applyMiddleware(
       sagaMiddleware,
       routerMiddleware(history) // for dispatching history actions
-    ),
-    (window as any).__REDUX_DEVTOOLS_EXTENSION__ &&
-      (window as any).__REDUX_DEVTOOLS_EXTENSION__()
+    )
+    // remove redux devtools extension when deploy
+    // (window as any).__REDUX_DEVTOOLS_EXTENSION__ &&
+    //   (window as any).__REDUX_DEVTOOLS_EXTENSION__()
   )
 );
 // Then run the saga
