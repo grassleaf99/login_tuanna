@@ -19,3 +19,16 @@
   min-height: 100vh;
   color: white;
 }
+
+@media screen and (max-width: 992px) {
+  .sec-login {
+    background-color: #eeeeee;
+  }
+
+  .login-form {
+    width: 100%;
+    background-color: #eeeeee;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+}
